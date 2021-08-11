@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <title>Award Winners</title>
+  </head>
+  <body>
+    <ol>
+      <li class="bc-name">
+        <a href="http://www.example.com/books" class="bc-link">Books</a>
+      </li>
+      <li class="bc-name">
+        <a href="http://www.example.com/sciencefiction" class="bc-link">Science Fiction</a>
+      </li>
+      <li class="bc-name">
+        Award Winners
+      </li>
+    </ol>
+    <script type="application/javascript">
+        (function () {
+    
+            //let's find if breadcrumb exists on the page
+            var isBreadcrumb = document.getElementsByClassName('bc-name');
+            var x = isBreadcrumb.length;
+    
+    
+            //yes it does exist
+            if (x > 0) {
+                //find head tag
+                var s = document.getElementsByTagName("head")[0];
+                //create our script tag
+                var b = document.createElement("script");
+                b.type = 'application/ld+json';
+    
+                //access Breadcrumb names
+                var isBreadcrumbName = document.getElementsByClassName('bc-link');
+    
+                var collection = [];
+    
+                //create our listitems details
+                for (var i = 0; i < x - 1; i++) {
+                    collection[i] = {
+                        "@type": "ListItem",
+                        "position": i + 1,
+                        "name": isBreadcrumbName[i].textContent,
+                        "item": new URL(isBreadcrumbName[i].getAttribute('href'), window.location).href
+                    };
+                };
+    
+                //last item is not a hot link we need to add last listitem little different
+                collection[x - 1] = {
+                    "@type": "ListItem",
+                    "position": x,
+                    "name": isBreadcrumb[x - 1].innerHTML.replace(/(\r\n|\n|\r)/gm, "").trim(),
+                    "item": window.location.href
+                };
+    
+                //now let's stich everything together
+                var jsonstart = {
+                    "@context": "http://schema.org",
+                    "@type": "BreadcrumbList",
+                    "itemListElement": collection
+                };
+    
+                //wait a minute, we need to stringfy the output
+                b.text = JSON.stringify(jsonstart);
+    
+                //now, time to add to the DOM
+                s.insertBefore(b, s.lastChild[0]);
+            };
+            })();
+        </script>
+  </body>
+</html>
