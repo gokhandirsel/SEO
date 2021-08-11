@@ -1,6 +1,7 @@
 # SEO
 SEO Related Stuff to reduce repetitive tasks. 
-Mosf of these approaches are POC and nothing production ready. It can be useful to tell the story for engineers in product teams. 
+Mosf of these approaches are POC and nothing production ready. Please be nice if you have any comments or feedback :) 
+It can be useful to tell the story for engineers in product teams. Or even maybe to use in Tag Management solutino to inject in your site where it is applicable. 
 
 ## FAQs JSON-LD  
 There are some requirements/dependencies for JS to work.  
